@@ -17,21 +17,22 @@
         border: none;
         border-radius: 5px;
       }
-Copy code
-  /* Style the console output */
-  #consoleOutput {
-    margin-top: 20px;
-    font-family: monospace;
-    color: #333;
-  }
-</style>
+
+      /* Style the console output */
+      #consoleOutput {
+        margin-top: 20px;
+        font-family: monospace;
+        color: #333;
+      }
+    </style>
   </head>
   <body>
     <center>
-    <input type="file" id="fileInput" onchange="uploadToIpfs()" />
+    <input type="file" id="fileInput"/>
     <div id="consoleOutput"></div>
     <button onclick="uploadToIpfs()">Upload</button>
     </center>
+    <script src="https://cdn.jsdelivr.net/npm/ipfs-http-client@38.0.0/dist/index.min.js"></script>
     <script src="ipfs-upload.js"></script>
   </body>
 </html>
