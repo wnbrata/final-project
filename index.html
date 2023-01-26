@@ -2,7 +2,6 @@
 <html>
   <head>
     <title>IPFS File Upload</title>
-     <link rel="stylesheet" href="styles.css">
     <style>
       /* Save this code as a separate file with a .css file extension */
       /* Set the background image */
@@ -18,7 +17,16 @@
         border: none;
         border-radius: 5px;
       }
-
+      /* Style the upload button */
+      button {
+        padding: 10px 20px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 20px;
+      }
       /* Style the console output */
       #consoleOutput {
         margin-top: 20px;
@@ -28,9 +36,9 @@
     </style>
   </head>
   <body>
-    <input type="file" id="fileInput" onchange="uploadToIpfs()" />
+    <input type="file" id="fileInput" />
+    <button onclick="uploadToIpfs()">Upload</button>
     <div id="consoleOutput"></div>
-    <script src="ipfs-upload.js"></script>
 
     <!-- Save this code as a separate file with a .js file extension -->
     <script src="https://cdn.jsdelivr.net/npm/ipfs-api@21.0.0/dist/index.min.js"></script>
@@ -44,6 +52,9 @@
 
         // Add the file to IPFS
         const addedFile = await ipfs.files.add(file);
+
+        // Display the Hash and link for the uploaded document on the blockchain
+        document.getElementById("consoleOutput").innerHTML = `Hash: ${addedFile[0].hash}<br>Link: https://ipfs.io/ipfs/${addedFile[0].hash}`;
       }
     </script>
   </body>
