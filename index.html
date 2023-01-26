@@ -2,17 +2,13 @@
 <html>
   <head>
     <title>IPFS File Upload</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
     <style>
-      /* Save this code as a separate file with a .css file extension */
       /* Set the background image */
       body {
         background-image: url('https://www.uniduna.hu/media/djmediatools/cache/3-fooldal-slider-eng/1170x450-towidth-100-3.1.jpg');
         background-size: cover;
         background-repeat: no-repeat;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 100vh;
       }
       /* Style the file input field */
       input[type="file"] {
@@ -21,48 +17,31 @@
         border: none;
         border-radius: 5px;
       }
-      /* Style the upload button */
-      #uploadButton {
-        padding: 10px 20px;
-        background-color: #4CAF50;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        margin-top: 10px;
-      }
+
       /* Style the console output */
       #consoleOutput {
         margin-top: 20px;
         font-family: monospace;
         color: #333;
-        text-align: center;
       }
     </style>
   </head>
   <body>
+    <center>
     <input type="file" id="fileInput" onchange="uploadToIpfs()" />
-    <button id="uploadButton" onclick="uploadToIpfs()">Upload</button>
     <div id="consoleOutput"></div>
-
-    <!-- Save this code as a separate file with a .js file extension -->
-    <script src="https://cdn.jsdelivr.net/npm/ipfs-api@21.0.0/dist/index.min.js"></script>
+    <button onclick="uploadToIpfs()">Upload</button>
+    </center>
+    <script src="https://cdn.jsdelivr.net/npm/ipfs-http-client@38.0.0/dist/index.min.js"></script>
     <script>
       async function uploadToIpfs() {
         // Get the selected file from the input
         const file = document.getElementById("fileInput").files[0];
-
         // Create an IPFS instance
-        const ipfs = window.IpfsApi('https://ipfs.infura.io', '5001', {protocol: 'https'});
-
+        const ipfs = IpfsHttpClient({ host: 'ipfs.io', port: '443', protocol: 'https' })
         // Add the file to IPFS
-        const addedFile = await ipfs.files.add(file);
+        const addedFile = await ipfs.add(file);
+        console.log("IPFS Hash: "+addedFile[0].hash);
+        console.log("Blockchain link: https://ipfs.io/ipfs/"+added
 
-        // Get the hash and link of the added file
-        const fileHash = addedFile[0].hash;
-        const fileLink = `https://ipfs.io/ipfs/${fileHash}`;
-
-        // Display the hash and link on the page
-        const consoleOutput = document.getElementById("consoleOutput");
-        consoleOutput.innerHTML = `File Hash: ${fileHash}
 
