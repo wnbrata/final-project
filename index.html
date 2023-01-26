@@ -9,6 +9,10 @@
         background-image: url('https://www.uniduna.hu/media/djmediatools/cache/3-fooldal-slider-eng/1170x450-towidth-100-3.1.jpg');
         background-size: cover;
         background-repeat: no-repeat;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
       }
       /* Style the file input field */
       input[type="file"] {
@@ -18,26 +22,27 @@
         border-radius: 5px;
       }
       /* Style the upload button */
-      button {
+      #uploadButton {
         padding: 10px 20px;
         background-color: #4CAF50;
         color: white;
         border: none;
         border-radius: 5px;
         cursor: pointer;
-        margin-top: 20px;
+        margin-top: 10px;
       }
       /* Style the console output */
       #consoleOutput {
         margin-top: 20px;
         font-family: monospace;
         color: #333;
+        text-align: center;
       }
     </style>
   </head>
   <body>
-    <input type="file" id="fileInput" />
-    <button onclick="uploadToIpfs()">Upload</button>
+    <input type="file" id="fileInput" onchange="uploadToIpfs()" />
+    <button id="uploadButton" onclick="uploadToIpfs()">Upload</button>
     <div id="consoleOutput"></div>
 
     <!-- Save this code as a separate file with a .js file extension -->
@@ -48,14 +53,16 @@
         const file = document.getElementById("fileInput").files[0];
 
         // Create an IPFS instance
-        const ipfs = window.IpfsApi('https://ipfs.infura.io', '5001', {protocol: 'https'})
+        const ipfs = window.IpfsApi('https://ipfs.infura.io', '5001', {protocol: 'https'});
 
         // Add the file to IPFS
         const addedFile = await ipfs.files.add(file);
 
-        // Display the Hash and link for the uploaded document on the blockchain
-        document.getElementById("consoleOutput").innerHTML = `Hash: ${addedFile[0].hash}<br>Link: https://ipfs.io/ipfs/${addedFile[0].hash}`;
-      }
-    </script>
-  </body>
-</html>
+        // Get the hash and link of the added file
+        const fileHash = addedFile[0].hash;
+        const fileLink = `https://ipfs.io/ipfs/${fileHash}`;
+
+        // Display the hash and link on the page
+        const consoleOutput = document.getElementById("consoleOutput");
+        consoleOutput.innerHTML = `File Hash: ${fileHash}
+
