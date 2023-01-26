@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>IPFS File Upload</title>
+     <link rel="stylesheet" href="styles.css">
+    <style>
+      /* Save this code as a separate file with a .css file extension */
+      /* Set the background image */
+      body {
+        background-image: url('https://www.uniduna.hu/media/djmediatools/cache/3-fooldal-slider-eng/1170x450-towidth-100-3.1.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+      }
+      /* Style the file input field */
+      input[type="file"] {
+        padding: 10px;
+        background-color: #f2f2f2;
+        border: none;
+        border-radius: 5px;
+      }
+
+      /* Style the console output */
+      #consoleOutput {
+        margin-top: 20px;
+        font-family: monospace;
+        color: #333;
+      }
+    </style>
+  </head>
+  <body>
+    <input type="file" id="fileInput" onchange="uploadToIpfs()" />
+    <div id="consoleOutput"></div>
+    <script src="ipfs-upload.js"></script>
+
+    <!-- Save this code as a separate file with a .js file extension -->
+    <script src="https://cdn.jsdelivr.net/npm/ipfs-api@21.0.0/dist/index.min.js"></script>
+    <script>
+      async function uploadToIpfs() {
+        // Get the selected file from the input
+        const file = document.getElementById("fileInput").files[0];
+
+        // Create an IPFS instance
+        const ipfs = window.IpfsApi('https://ipfs.infura.io', '5001', {protocol: 'https'})
+
+        // Add the file to IPFS
+        const addedFile = await ipfs.files.add(file);
+      }
+    </script>
+  </body>
+</html>
