@@ -10,9 +10,6 @@
         background-size: cover;
         background-repeat: no-repeat;
         height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
       }
       /* Style the file input field */
       input[type="file"] {
@@ -21,29 +18,26 @@
         border: none;
         border-radius: 5px;
       }
+
       /* Style the console output */
       #consoleOutput {
         margin-top: 20px;
         font-family: monospace;
         color: #333;
       }
-      /* Style the title */
-      h1 {
-        text-align: center;
-        font-size: 2em;
-        color: #fff;
-      }
     </style>
   </head>
   <body>
-    <h1>Upload the document to the blockchain</h1>
     <center>
+    <h1>Upload the document to the blockchain</h1>
     <input type="file" id="fileInput" onchange="uploadToIpfs()" />
     <div id="consoleOutput"></div>
     <button onclick="uploadToIpfs()">Upload</button>
     </center>
     <script src="https://cdn.jsdelivr.net/npm/ipfs-http-client@38.0.0/dist/index.min.js"></script>
-    <script src="ipfs-upload.js"></script>
-  </body>
-</html>
+    <script>
+      async function uploadToIpfs() {
+        // Get the selected file from the input
+        const file = document
+
 
