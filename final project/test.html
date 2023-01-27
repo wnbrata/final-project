@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>IPFS File Upload</title>
+    <script src="https://unpkg.com/pinata-sdk"></script>
+  </head>
+  <body>
+    <form id="form">
+      <input type="file" id="file" name="file" />
+      <button type="submit" onclick="uploadToIpfs()">Upload</button>
+    </form>
+    <br>
+    <p id="output"></p>
+    <script>
+      async function uploadToIpfs() {
+        const file = document.getElementById("file").files[0];
+        const formData = new FormData();
+        formData.append("file", file);
+      
+        //Initialize the Pinata SDK
+        const pinata = new PinataSDK("YOUR_API_KEY", "YOUR_SECRET_API_KEY");
+        
+        //Upload the file to IPFS
+        const res = await pinata.pinFileToIPFS(formData);
+        document.getElementById("output").innerHTML = "IPFS Hash: " + res.IpfsHash;
+        document.getElementById("output").innerHTML += " Blockchain Link: " + "https://pinata.cloud/ipfs/" + res.IpfsHash;
+      }
+    </script>
+  </body>
+</html>
