@@ -1,66 +1,15 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>IPFS File Uploader</title>
-     <link rel="stylesheet" href="style.css">
-    <script src="https://unpkg.com/ipfs-http-client"></script>
-    <script src="https://cdn.jsdelivr.net/npm/qrcode.js@1.4.4/qrcode.min.js">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="ipfs-uplode.js"></script>
   </head>
-  <body>
-    <input type="file" id="file-input" onchange="uploadFile()">
-    <button id="upload-button" disabled onclick="retrieveLinks()">Upload</button>
-    <br><br>
-    <div id="link-container"></div>
+  <body background="https://www.uniduna.hu/media/djmediatools/cache/3-fooldal-slider-eng/1170x450-towidth-100-3.1.jpg">
+    <div class="container">
+      <h1>Upload your file to IPFS</h1>
+      <input type="file" id="file-input" onchange="uploadToIpfs()">
+      <button id="upload-button" onclick="uploadToIpfs()">Upload</button>
+      <p id="hash-output"></p>
+    </div>
   </body>
-  <script>
-    const API_KEY = "YOUR_API_KEY";
-    const SECRET_API_KEY = "YOUR_SECRET_API_KEY";
-    const fileInput = document.getElementById("file-input");
-    const uploadButton = document.getElementById("upload-button");
-    const linkContainer = document.getElementById("link-container");
-
-    function uploadFile() {
-      const file = fileInput.files[0];
-      const url = `https://api.pinata.cloud/pinning/pinFileToIPFS`;
-      const formData = new FormData();
-      formData.append("file", file);
-
-      fetch(url, {
-        method: "POST",
-        headers: {
-          "pinata_api_key": API_KEY,
-          "pinata_secret_api_key": SECRET_API_KEY
-        },
-        body: formData
-      })
-        .then(response => response.json())
-        .then(data => {
-          uploadButton.disabled = false;
-          console.log(data);
-        })
-        .catch(error => {
-          console.error(error);
-        });
-    }
-
-    function retrieveLinks() {
-      const hash = "YOUR_FILE_HASH"; // Replace with the hash from the previous step
-      const url = `https://api.pinata.cloud/data/getIpfsAndCloudStorageProviders/${hash}`;
-
-      fetch(url, {
-        method: "GET",
-        headers: {
-          "pinata_api_key": API_KEY,
-          "pinata_secret_api_key": SECRET_API_KEY
-        }
-      })
-        .then(response => response.json())
-        .then(data => {
-          const ipfsHash = data.IpfsHash;
-          const ipfsAddress = `https://ipfs.io/ipfs/${ipfsHash}`;
-          const ipnsAddress = `https://ipfs.io/ipns/${ipfsHash}`;
-          linkContainer.innerHTML = `
-            <p>
-
-
-
+</html>
