@@ -1,0 +1,12 @@
+body {
+  font-family: Arial, sans-serif;
+}
+
+#ipfs-link, #ipns-link {
+  margin-top: 10px;
+  font-size: 12px;
+}
+
+#ipfs-qr, #ipns-qr {
+  margin-top: 10px;
+}
