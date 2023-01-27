@@ -2,42 +2,24 @@
 <html>
   <head>
     <title>IPFS File Upload</title>
+    <script src="https://unpkg.com/ipfs-http-client/dist/index.min.js"></script>
+    <script src="ipfs-upload.js"></script>
     <link rel="stylesheet" type="text/css" href="style.css">
-    <style>
-      /* Set the background image */
-      body {
-        background-image: url('https://www.uniduna.hu/media/djmediatools/cache/3-fooldal-slider-eng/1170x450-towidth-100-3.1.jpg');
-        background-size: cover;
-        background-repeat: no-repeat;
-        height: 100vh;
-      }
-      /* Style the file input field */
-      input[type="file"] {
-        padding: 10px;
-        background-color: #f2f2f2;
-        border: none;
-        border-radius: 5px;
-      }
-
-      /* Style the console output */
-      #consoleOutput {
-        margin-top: 20px;
-        font-family: monospace;
-        color: #333;
-      }
-    </style>
   </head>
-  <body>
+  <body background="bg.jpg">
     <center>
-    <h1>Upload the document to the blockchain</h1>
-    <input type="file" id="fileInput" onchange="uploadToIpfs()" />
-    <div id="consoleOutput"></div>
-    <button onclick="uploadToIpfs()">Upload</button>
+      <p>Upload the document to the blockchain</p>
+      <input type="file" id="fileInput" onchange="uploadToIpfs()" /><br><br>
+      <button onclick="uploadToIpfs()">Upload</button>
+      <br>
+      <br>
+      <p id="status"></p>
+      <p>Blockchain link: <a id="blockchainLink"></a></p>
+      <p>IPFS hash: <span id="hash"></span></p>
+      <p>IPNS link : <a id="ipnsLink"></a> </p>
     </center>
-    <script src="https://cdn.jsdelivr.net/npm/ipfs-http-client@38.0.0/dist/index.min.js"></script>
-    <script>
-      async function uploadToIpfs() {
-        // Get the selected file from the input
-        const file = document
+  </body>
+</html>
+
 
 
